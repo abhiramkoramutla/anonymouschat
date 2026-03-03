@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SecureChat</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+
+<div class="chat-root">
+
+  <!-- ── Topbar ─────────────────────────────────────────── -->
+  <div class="topbar">
+
+    <div class="topbar-left">
+      <div class="topbar-brand">
+        <div class="topbar-brand-icon">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <span class="topbar-brand-name">SecureChat</span>
+      </div>
+
+      <div class="topbar-sep"></div>
+
+      <div class="status-badge idle" id="statusBadge">
+        <span class="status-led" id="statusLed"></span>
+        <span id="statusText">Connecting</span>
+      </div>
+
+      <div class="session-pill hidden" id="sessionPill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span id="sessionPillText"></span>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <div class="you-chip">
+        <div class="you-avatar" id="youAvatar"></div>
+        <strong id="youName"></strong>
+      </div>
+
+      <button class="btn-leave" id="leaveBtn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Leave
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ── Partner bar ───────────────────────────────────── -->
+  <div class="partner-bar" id="partnerBar">
+    <div class="partner-av" id="partnerAv"></div>
+    <span class="partner-label" id="partnerLabel"></span>
+
+    <div class="key-anim" id="keyAnim">
+      <div class="mini-spin"></div>
+      Establishing secure channel...
+    </div>
+
+    <div class="partner-secure" id="partnerSecure">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      End-to-end encrypted
+    </div>
+  </div>
+
+  <!-- ── Chat body ─────────────────────────────────────── -->
+  <div class="chat-body">
+
+    <!-- Waiting -->
+    <div class="waiting-pane" id="waitingPane">
+      <div class="wait-ring"></div>
+      <div class="wait-title">Waiting for your contact</div>
+      <div class="wait-sub">Share the session ID with them to connect</div>
+      <div class="wait-session-id hidden" id="waitSessionId"></div>
+    </div>
+
+    <!-- Messages -->
+    <div class="messages-pane hidden" id="messagesPane"></div>
+
+    <!-- Typing -->
+    <div class="typing-row" id="typingRow">
+      <div class="typing-bubble">
+        <span></span><span></span><span></span>
+      </div>
+      <span class="typing-name" id="typingName"></span>
+    </div>
+
+  </div>
+
+  <!-- ── Input bar ─────────────────────────────────────── -->
+  <div class="input-bar">
+    <textarea
+      class="msg-textarea"
+      id="chatInput"
+      placeholder="Write a message... (Enter to send)"
+      rows="1"
+      maxlength="4000"
+      disabled
+    ></textarea>
+    <button class="btn-send" id="sendBtn" disabled>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+
+</div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>

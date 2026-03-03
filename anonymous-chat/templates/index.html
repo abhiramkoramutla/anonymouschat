@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SecureChat</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body class="join-body">
+
+<div class="bg-shapes" aria-hidden="true">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
+  <div class="shape shape-4"></div>
+  <div class="float-icon fi-1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+  <div class="float-icon fi-2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+  <div class="float-icon fi-3"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+  <div class="float-icon fi-4"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="17" cy="21" r="1"/><circle cx="9" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
+  <div class="float-icon fi-5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+</div>
+
+<div class="join-layout">
+
+  <!-- LEFT -->
+  <div class="join-left">
+    <div class="join-nav">
+      <div class="nav-brand">
+        <div class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <span class="nav-name">SecureChat</span>
+      </div>
+    </div>
+
+    <div class="join-hero">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-line"></span>
+        End-to-end encrypted
+      </div>
+      <h1 class="hero-title">
+        Conversations that<br/>
+        <span class="hero-title-em">leave no trace.</span>
+      </h1>
+      <p class="hero-body">
+        Private 1-on-1 chats or secure group rooms — up to 8 people. Admin-controlled access. Everything disappears when the session ends.
+      </p>
+    </div>
+
+    <div class="join-left-footer">
+      Keys are generated in your browser and never reach our servers.
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="join-right">
+    <div class="form-card">
+
+      <!-- Mode toggle -->
+      <div class="chat-mode-toggle">
+        <button class="cmt-btn active" id="btnPrivate" onclick="setMode('private')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Private Chat
+        </button>
+        <button class="cmt-btn" id="btnGroup" onclick="setMode('group')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Group Chat
+        </button>
+      </div>
+
+      <!-- ── PRIVATE FORM ─────────────────────────────── -->
+      <div id="privateForm">
+        <div class="form-card-top">
+          <div class="form-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div>
+            <div class="form-card-title">Private session</div>
+            <div class="form-card-sub">1-on-1 · Encrypted · Ephemeral</div>
+          </div>
+        </div>
+        <div class="form-sep"></div>
+
+        <div class="field">
+          <label class="field-label" for="pvtName">Your display name</label>
+          <div class="field-wrap">
+            <input class="field-input" id="pvtName" type="text" placeholder="e.g. Alex" maxlength="24" autocomplete="off" spellcheck="false"/>
+            <span class="field-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
+          </div>
+          <div class="field-err hidden" id="pvtNameErr">Enter at least 2 characters.</div>
+        </div>
+
+        <div class="field">
+          <div class="field-label-row">
+            <label class="field-label" for="pvtSession">Session ID</label>
+            <span class="field-label-note">Share with your contact</span>
+          </div>
+          <div class="field-wrap">
+            <input class="field-input" id="pvtSession" type="text" placeholder="e.g. swift-vault-347" maxlength="32" autocomplete="off" spellcheck="false"/>
+            <span class="field-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+          </div>
+          <div class="field-err hidden" id="pvtSessionErr">Must be at least 4 characters.</div>
+          <div class="id-actions">
+            <button class="id-btn" id="pvtGenBtn" type="button">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
+              Generate ID
+            </button>
+            <button class="id-btn id-copy hidden" id="pvtCopyBtn" type="button">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+
+        <button class="btn-cta" id="pvtJoinBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Start Private Session
+          <svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+
+      <!-- ── GROUP FORM ───────────────────────────────── -->
+      <div id="groupForm" class="hidden">
+        <div class="form-card-top">
+          <div class="form-card-icon" style="background:#F0FDF4;border-color:#BBF7D0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <div class="form-card-title">Group session</div>
+            <div class="form-card-sub" style="color:#059669;">Up to 8 members · Admin-controlled</div>
+          </div>
+        </div>
+        <div class="form-sep"></div>
+
+        <div class="field">
+          <label class="field-label" for="grpName">Your display name</label>
+          <div class="field-wrap">
+            <input class="field-input" id="grpName" type="text" placeholder="e.g. Alex" maxlength="24" autocomplete="off" spellcheck="false"/>
+            <span class="field-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
+          </div>
+          <div class="field-err hidden" id="grpNameErr">Enter at least 2 characters.</div>
+        </div>
+
+        <!-- Sub-toggle: Create or Join -->
+        <div class="sub-toggle">
+          <button class="sub-btn active" id="subCreate" onclick="setGroupAction('create')">Create group</button>
+          <button class="sub-btn" id="subJoin" onclick="setGroupAction('join')">Join group</button>
+        </div>
+
+        <!-- Create fields -->
+        <div id="grpCreateFields">
+          <div class="field">
+            <label class="field-label" for="grpRoomName">Group name <span style="font-weight:400;color:var(--ink-400)">(optional)</span></label>
+            <div class="field-wrap">
+              <input class="field-input" id="grpRoomName" type="text" placeholder="e.g. Engineering Team" maxlength="40" autocomplete="off"/>
+              <span class="field-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Join fields -->
+        <div id="grpJoinFields" class="hidden">
+          <div class="field">
+            <label class="field-label" for="grpJoinId">Group ID</label>
+            <div class="field-wrap">
+              <input class="field-input" id="grpJoinId" type="text" placeholder="e.g. A3F7B2C1D4" maxlength="10" autocomplete="off" spellcheck="false" style="text-transform:uppercase;letter-spacing:1px;"/>
+              <span class="field-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+            </div>
+            <div class="field-err hidden" id="grpJoinIdErr">Enter the 10-character Group ID.</div>
+          </div>
+        </div>
+
+        <button class="btn-cta btn-green" id="grpBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span id="grpBtnLabel">Create Group</span>
+          <svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── Mode toggle ─────────────────────────────────────────────────────────────
+let mode = 'private', groupAction = 'create';
+
+function setMode(m) {
+  mode = m;
+  document.getElementById('btnPrivate').classList.toggle('active', m==='private');
+  document.getElementById('btnGroup').classList.toggle('active', m==='group');
+  document.getElementById('privateForm').classList.toggle('hidden', m==='group');
+  document.getElementById('groupForm').classList.toggle('hidden', m==='private');
+}
+
+function setGroupAction(a) {
+  groupAction = a;
+  document.getElementById('subCreate').classList.toggle('active', a==='create');
+  document.getElementById('subJoin').classList.toggle('active', a==='join');
+  document.getElementById('grpCreateFields').classList.toggle('hidden', a==='join');
+  document.getElementById('grpJoinFields').classList.toggle('hidden', a==='create');
+  document.getElementById('grpBtnLabel').textContent = a==='create' ? 'Create Group' : 'Request to Join';
+}
+
+// ── ID generation ────────────────────────────────────────────────────────────
+const ADJ  = ['swift','silent','bright','calm','dark','deep','clear','bold','iron','echo','nova','apex'];
+const NOUN = ['river','bridge','falcon','vault','stone','ember','cloud','frame','pulse','node','orbit','cipher'];
+function genId() { return `${ADJ[Math.floor(Math.random()*ADJ.length)]}-${NOUN[Math.floor(Math.random()*NOUN.length)]}-${Math.floor(100+Math.random()*900)}`; }
+
+const pvtSess = document.getElementById('pvtSession');
+document.getElementById('pvtGenBtn').addEventListener('click', () => {
+  pvtSess.value = genId(); pvtSess.dispatchEvent(new Event('input'));
+});
+document.getElementById('pvtCopyBtn').addEventListener('click', () => {
+  navigator.clipboard.writeText(pvtSess.value).then(() => {
+    const b = document.getElementById('pvtCopyBtn');
+    b.textContent = '✓ Copied'; setTimeout(() => b.innerHTML = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`, 2000);
+  });
+});
+pvtSess.addEventListener('input', () => {
+  document.getElementById('pvtCopyBtn').classList.toggle('hidden', !pvtSess.value.trim());
+  document.getElementById('pvtSessionErr').classList.add('hidden');
+});
+
+// ── Validation helpers ────────────────────────────────────────────────────────
+function showErr(id, msg) { const e=document.getElementById(id); e.textContent=msg; e.classList.remove('hidden'); }
+function hideErr(id) { document.getElementById(id).classList.add('hidden'); }
+
+// ── Private submit ────────────────────────────────────────────────────────────
+document.getElementById('pvtJoinBtn').addEventListener('click', submitPrivate);
+[document.getElementById('pvtName'), pvtSess].forEach(el => el.addEventListener('keydown', e => { if(e.key==='Enter') submitPrivate(); }));
+
+function submitPrivate() {
+  const name = document.getElementById('pvtName').value.trim();
+  const sid  = pvtSess.value.trim();
+  let ok = true;
+  if (!name || name.length < 2) { showErr('pvtNameErr','Enter at least 2 characters.'); ok=false; }
+  if (!sid  || sid.length  < 4) { showErr('pvtSessionErr','Must be at least 4 characters.'); ok=false; }
+  if (!ok) return;
+  sessionStorage.setItem('sc_username', name);
+  sessionStorage.setItem('sc_mode', 'session');
+  sessionStorage.setItem('sc_sessionId', sid);
+  window.location.href = '/chat';
+}
+
+// ── Group submit ──────────────────────────────────────────────────────────────
+document.getElementById('grpBtn').addEventListener('click', submitGroup);
+
+function submitGroup() {
+  const name = document.getElementById('grpName').value.trim();
+  if (!name || name.length < 2) { showErr('grpNameErr','Enter at least 2 characters.'); return; }
+
+  if (groupAction === 'create') {
+    const roomName = document.getElementById('grpRoomName').value.trim();
+    sessionStorage.setItem('sc_username',  name);
+    sessionStorage.setItem('sc_grpAction', 'create');
+    sessionStorage.setItem('sc_grpName',   roomName || name + "'s Group");
+    window.location.href = '/group';
+  } else {
+    const gid = document.getElementById('grpJoinId').value.trim().toUpperCase();
+    if (gid.length < 4) { showErr('grpJoinIdErr','Enter the Group ID you received.'); return; }
+    sessionStorage.setItem('sc_username',  name);
+    sessionStorage.setItem('sc_grpAction', 'join');
+    sessionStorage.setItem('sc_grpId',     gid);
+    window.location.href = '/group';
+  }
+}
+
+// clear errors on input
+['pvtName','pvtSession','grpName','grpJoinId'].forEach(id => {
+  const el = document.getElementById(id);
+  if(el) el.addEventListener('input', () => { ['pvtNameErr','pvtSessionErr','grpNameErr','grpJoinIdErr'].forEach(e => hideErr(e)); });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SecureChat — Group</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+<div class="group-root">
+
+  <!-- ── Topbar ──────────────────────────────────────── -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-brand">
+        <div class="topbar-brand-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <span class="topbar-brand-name">SecureChat</span>
+      </div>
+      <div class="topbar-sep"></div>
+      <div class="status-badge idle" id="statusBadge">
+        <span class="status-led" id="statusLed"></span>
+        <span id="statusText">Connecting</span>
+      </div>
+      <div class="group-id-pill hidden" id="groupIdPill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        <span id="groupIdText"></span>
+        <button class="pill-copy-btn" id="copyGroupId" title="Copy Group ID">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="you-chip">
+        <div class="you-avatar" id="youAvatar"></div>
+        <strong id="youName"></strong>
+      </div>
+      <button class="btn-leave" id="leaveBtn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Leave
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Body: sidebar + chat ─────────────────────────── -->
+  <div class="group-body">
+
+    <!-- Sidebar -->
+    <div class="group-sidebar">
+
+      <!-- Group info -->
+      <div class="sidebar-section">
+        <div class="sidebar-group-name" id="sideGroupName">Loading...</div>
+        <div class="sidebar-group-meta" id="sideGroupMeta">—</div>
+      </div>
+
+      <!-- Admin panel (admin only) -->
+      <div class="sidebar-section admin-panel hidden" id="adminPanel">
+        <div class="sidebar-sec-title">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Admin Controls
+        </div>
+        <div class="pending-list" id="pendingList">
+          <div class="empty-pending" id="emptyPending">No pending requests</div>
+        </div>
+        <button class="btn-dissolve" id="dissolveBtn">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          Dissolve Group
+        </button>
+      </div>
+
+      <!-- Members list -->
+      <div class="sidebar-section">
+        <div class="sidebar-sec-title">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Members <span class="member-count-badge" id="memberCount">0</span>
+        </div>
+        <div class="member-list" id="memberList"></div>
+      </div>
+
+    </div>
+
+    <!-- Main chat area -->
+    <div class="group-main">
+
+      <!-- Waiting pane -->
+      <div class="waiting-pane" id="waitingPane">
+        <div class="wait-ring"></div>
+        <div class="wait-title" id="waitTitle">Setting up group...</div>
+        <div class="wait-sub" id="waitSub">Please wait</div>
+        <div class="wait-session-id hidden" id="waitGroupId"></div>
+      </div>
+
+      <!-- Messages -->
+      <div class="messages-pane hidden" id="messagesPane"></div>
+
+      <!-- Typing -->
+      <div class="typing-row" id="typingRow">
+        <div class="typing-bubble"><span></span><span></span><span></span></div>
+        <span class="typing-name" id="typingName"></span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Input bar -->
+  <div class="input-bar" id="inputBar">
+    <textarea class="msg-textarea" id="chatInput" placeholder="Write a message to the group..." rows="1" maxlength="4000" disabled></textarea>
+    <button class="btn-send" id="sendBtn" disabled>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+
+</div>
+<script src="/static/js/group.js"></script>
+</body>
+</html>
