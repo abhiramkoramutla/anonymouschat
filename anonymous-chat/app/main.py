@@ -304,6 +304,33 @@ async def ws_group(websocket: WebSocket):
                                 await c.send_json({"type":"group_dissolved","message":"The admin has dissolved this group."})
                         await conn.send_json({"type":"group_dissolved","message":"You dissolved the group."})
 
+            # Member sends their ECDH public key to admin for key exchange
+            elif t == "member_pub_key":
+                group = await group_manager.get_group_for_conn(connection_id)
+                if group and group.is_member(connection_id):
+                    admin_conn = group.members.get(group.admin_id)
+                    if admin_conn:
+                        await admin_conn.send_json({
+                            "type":      "member_pub_key",
+                            "publicKey": data.get("publicKey", ""),
+                            "fromId":    connection_id,
+                            "username":  username,
+                        })
+
+            # Admin sends wrapped group AES key to a specific member
+            elif t == "group_key_for_member":
+                target_id = data.get("targetId", "")
+                group = await group_manager.get_group_for_conn(connection_id)
+                if group and group.is_admin(connection_id):
+                    target_conn = group.members.get(target_id)
+                    if target_conn:
+                        await target_conn.send_json({
+                            "type":       "group_key_for_member",
+                            "wrappedKey": data.get("wrappedKey", ""),
+                            "keyIv":      data.get("keyIv", ""),
+                            "adminPub":   data.get("adminPub", ""),
+                        })
+
             # Encrypted group message — relay to all members
             elif t == "group_message":
                 payload = data.get("payload","")
